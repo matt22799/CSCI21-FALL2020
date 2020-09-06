@@ -1,98 +1,78 @@
-// ASSIGNMENT NAME: Lab 1.2
+// ASSIGNMENT NAME: Lab 2.2
 // PROGRAMMER NAME: Matthew Davenport
-//
-// DATE: 8/30/20
+// DATE: 9/6/20
 #include <iostream>
+#include <ctime>
+
 using namespace std;
 
-// uncomment the above "using" directive and you can write:
-//   cout instead of std::cout
-//   cin  instead of std::cin
-//   endl instead of std::endl
-
-// QUESTIONs do not have to be answered -- they are there for your consideration.
-
 int main() {
-  // 1. Print a greeting
-    cout<<"Good morning!"<<endl;
 
-  // 2. Declare 2 integer variables
-    int a;
-    int b;
+srand(time(nullptr));
 
-  // 3. Prompt for the first integer
-    cout<<"Please enter a number"<<endl;
+// Counters
+int wins(0);
+int losses(0);
+int draws(0);
 
-  // 4. Read in the first integer
-    cin>>a;
+// Keep Playing Condition
+  bool keepPlaying(true);
+  while (keepPlaying) {
+    // Player's turn
+    char playerChoice;
+    cout<<"Enter an 'R' for Rock, 'S' for scissors, or 'P' for Paper"<<endl;
+    cin>>playerChoice;
+    cout<<"You chose "<<playerChoice<<endl;
 
-  // 5. Prompt for the second integer
-    cout<<"Please enter a second number"<<endl;
-  
-  // 6. Read in the second integer
-    cin>>b;
+    // Computer's turn
+    char computerChoice; 
+    int compInt = rand() % 3 + 1;
+      // Convert int to char
+      if (compInt == 1){
+        computerChoice = 'R';
+      } else if (compInt == 2){
+        computerChoice = 'S';
+      } else if (compInt == 3) {
+        computerChoice = 'P';
+      }
+    cout<<"The Computer chose "<<computerChoice<<endl;
 
-  // 7. Display the result of adding the two variables together
-  //    e.g., 3 + 2 = 5 (use the two variables and the calculated value in the output)
-    cout<<"The sum of "<<a<<" and "<<b<<" is "<<a+b<<endl;
+    // Compare choices
+    if (playerChoice == 'R' && computerChoice == 'S'){
+      cout<<"You Win!"<<endl;
+      wins++;
+    } else if (playerChoice == 'S' && computerChoice == 'P'){
+      cout<<"You Win!"<<endl;
+      wins++;
+    } else if (playerChoice == 'P' && computerChoice == 'R') {
+      cout<<"You Win!"<<endl;
+      wins++;
+    } else if (playerChoice == 'R' && computerChoice == 'P') {
+      cout<<"You Lose!"<<endl;
+      losses++;
+    } else if (playerChoice == 'P' && computerChoice == 'S') {
+      cout<<"You Lose!"<<endl;
+      losses++;
+    } else if (playerChoice == 'S' && computerChoice == 'R') {
+      cout<<"You Lose!"<<endl;
+      losses++;
+    } else if (playerChoice == computerChoice){
+      cout<<"Draw!"<<endl;
+      draws++;
+    }
 
-  // 8. Display the result of subtracting the second integer from the first
-  //    e.g., 3 - 2 = 1 (use the two variables and the calculated value in the output)
-    cout<<"The difference of "<<b<<" and "<<a<<" is "<<b-a<<endl;
-
-  // 9. Display the result of multiplying the two variables
-  //    e.g., 3 * 2 = 6 (use the two variables and the calculated value in the output)
-    cout<<"The product of "<<a<<" and "<<b<<" is "<<a*b<<endl;
-
-  // 10. Display the result of dividing the first integer by the second
-  //    e.g., 3 / 2 = 1 (use the two variables and the calculated value in the output)
-    cout<<"The quotient of "<<a<<" and "<<b<<" is "<<a/b<<endl;
-
-  // 11. Display the result of modding (%) the first integer by the second
-  //    e.g., 3 % 2 = 1 (use the two variables and the calculated value in the output)
-    cout<<"The mod of "<<a<<" and "<<b<<" is "<<a%b<<endl;
-  //    QUESTION: What does modulo/mod (%) do?
-
-  // 12. Declare 2 float variables
-    float c;
-    float d;
-
-  // 13. Prompt for the first float
-    cout<<"Please enter a decimal number"<<endl;
-
-  // 14. Read in the first float
-    cin>>c;
-
-  // 15. Prompt for the second float
-    cout<<"Please enter a second decimal number"<<endl;
-
-  // 16. Read in the second float
-    cin>>d;
-
-  // This code will "pretty print" the float variables.
-  // Try changing the "2" to other values to see what happens.
-  // If you did not uncomment "using" above, you need to use std::cout
-  //   on all three of these lines.
-  cout.setf(ios::fixed);
-  cout.setf(ios::showpoint);
-  cout.precision(10);
-
-  // 17. Display the result of adding the two variables together
-  //    e.g., 3.20 + 2.10 = 5.30 (use the two variables and the calculated value in the output)
-  cout<<"The sum of "<<c<<" and "<<d<<" is "<<c+d<<endl;
-
-  // 18. Display the result of subtracting the second float from the first
-  //    e.g., 3.20 - 2.10 = 1.10 (use the two variables and the calculated value in the output)
-  cout<<"The difference of "<<d<<" and "<<c<<" is "<<d-c<<endl;
-
-  // 19. Display the result of multiplying the two variables
-  //    e.g., 3.20 * 2.10 = 6.72 (use the two variables and the calculated value in the output)
-  cout<<"The product of "<<c<<" and "<<d<<" is "<<d*c<<endl;
-
-  // 20. Display the result of dividing the first float by the second
-  //    e.g., 3.20 / 2.10 = 1.52 (use the two variables and the calculated value in the output)
-  cout<<"The quotient of "<<c<<" and "<<d<<" is "<<c/d<<endl;
-  // QUESTION: Why is there no modulo (%) operation required for the float variables?
+    // Ask for replay
+    char answer;
+    cout<<"Play Again?(y/n)"<<endl;
+    cin>>answer;
+    if (toupper(answer) == 'N'){
+      keepPlaying = false;
+    }
+  }
+  // Display counters results
+  cout<<"Wins: "<<wins<<endl;
+  cout<<"Losses: "<<losses<<endl;
+  cout<<"Draws: "<<draws<<endl;
 
   return 0;
 }
